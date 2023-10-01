@@ -10,9 +10,9 @@ import java.util.Scanner;
  *
  * @author itc
  */
-public class CentreRecerca {
+public class CentreRecerca implements UnitatDeRecerca{
     
-    private final static Scanner DADES = new Scanner(System.in);
+    //private final static Scanner DADES = new Scanner(System.in);
 
     private String nom;
     private String ubicacio;
@@ -216,7 +216,7 @@ public class CentreRecerca {
 
             if (indexInvestigadorPrincipal != -1) {
 
-                departaments[indexDepartament].getInvestigadorsPrincipals()[indexInvestigadorPrincipal].updateInvestigadorPrincipal();
+                departaments[indexDepartament].getInvestigadorsPrincipals()[indexInvestigadorPrincipal].updateUnitatDeRecerca();
 
             } else {
 
@@ -258,7 +258,7 @@ public class CentreRecerca {
 
             if (indexInvestigadorAssociat != -1) {
 
-                departaments[indexDepartament].getInvestigadorsAssociats()[indexInvestigadorAssociat].updateInvestigadorAssociat();
+                departaments[indexDepartament].getInvestigadorsAssociats()[indexInvestigadorAssociat].updateUnitatDeRecerca();
 
             } else {
 
@@ -300,7 +300,7 @@ public class CentreRecerca {
 
             if (indexInvestigadorAuxiliar != -1) {
 
-                departaments[indexDepartament].getInvestigadorsAuxiliars()[indexInvestigadorAuxiliar].updateInvestigadorAuxiliar();
+                departaments[indexDepartament].getInvestigadorsAuxiliars()[indexInvestigadorAuxiliar].updateUnitatDeRecerca();
 
             } else {
 
@@ -314,6 +314,15 @@ public class CentreRecerca {
 
         }
 
+    }
+     @Override
+    public void updateUnitatDeRecerca() {
+        
+    }
+
+    @Override
+    public void showUnitatDeRecerca() {
+        
     }
 
 }

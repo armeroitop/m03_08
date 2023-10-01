@@ -11,14 +11,10 @@ import java.util.Scanner;
  *
  * @author itc
  */
-public class InvestigadorPrincipal {
+public class InvestigadorPrincipal extends Investigador{
     
-    private final static Scanner DADES = new Scanner(System.in);
+    //private final static Scanner DADES = new Scanner(System.in);
 
-    private String codi;
-    private String nom;
-    private int experiencia;
-    private double sou;
 
     /*
      TODO CONSTRUCTOR
@@ -30,10 +26,7 @@ public class InvestigadorPrincipal {
      */
     
     public InvestigadorPrincipal(String codi, String nom, int experiencia, double sou) {
-        this.codi = codi;
-        this.nom = nom;
-        this.experiencia = experiencia;
-        this.sou = sou;
+        super(codi, nom, experiencia, sou);
     }
 
 
@@ -41,37 +34,7 @@ public class InvestigadorPrincipal {
      TODO Heu d'implementar tots els mètodes accessors possibles.  
      */
     
-    public String getCodi() {
-        return codi;
-    }
 
-    public void setCodi(String codi) {
-        this.codi = codi;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public int getExperiencia() {
-        return experiencia;
-    }
-
-    public void setExperiencia(int experiencia) {
-        this.experiencia = experiencia;
-    }
-
-    public double getSou() {
-        return sou;
-    }
-
-    public void setSou(double sou) {
-        this.sou = sou;
-    }
    
 
     /*
@@ -125,32 +88,51 @@ public class InvestigadorPrincipal {
      
      Retorn: cap
      */
-    public void updateInvestigadorPrincipal() {
-        System.out.println("\nCodi de l'Investigador Principal: " + codi);
+   /* public void updateInvestigadorPrincipal() {
+        
+        System.out.println("\nCodi de l'Investigador Principal: " + getCodi());
         System.out.println("\nEntra el nou valor codi:");
-        codi = DADES.next();
+        setCodi(DADES.next());
         DADES.nextLine(); //Neteja buffer
-        System.out.println("\nNom de l'Investigador Principal: " + nom);
+        System.out.println("\nNom de l'Investigador Principal: " + getNom());
         System.out.println("\nEntra el nou valor nom:");
-        nom = DADES.nextLine();
+        setNom(DADES.nextLine());
         
         DADES.nextLine(); //Neteja buffer
-        System.out.println("\nExperiencia Investigador Principal:" + experiencia);
+        System.out.println("\nExperiencia Investigador Principal:" + getExperiencia());
         System.out.println("\nEntra nou valor experiència:");
-        experiencia = DADES.nextInt();
+        setExperiencia(DADES.nextInt());
 
-        System.out.println("\nSou de l'Investigador Principal: " + sou);
+        System.out.println("\nSou de l'Investigador Principal: " + getSou());
+        
+        super.updateUnitatDeRecerca();
         do {
             System.out.println("\nEntra nou valor sou (superior a 30000):");
-            sou = DADES.nextDouble();
-        } while (sou <= 30000);
+            setSou(DADES.nextDouble());
+        } while (getSou() <= 30000);
+    }*/
+
+    @Override
+    public void updateUnitatDeRecerca() {
+        super.updateUnitatDeRecerca(); 
+         do {
+            System.out.println("\nEntra nou valor sou (superior a 30000):");
+            setSou(DADES.nextDouble());
+        } while (getSou() <= 30000);
     }
     
+    
+    
 
-    public void showInvestigadorPrincipal() {
-        System.out.println("\nLes dades de l'Investigador/a Principal amb codi " + codi + " són:");
-        System.out.println("\nNom: " + nom);
-        System.out.println("\nExperiencia: " + experiencia);
-        System.out.print("\nSou: " + sou);
-    }
+    /*public void showInvestigadorPrincipal() {
+        
+        System.out.println("\nLes dades de l'Investigador/a Principal amb codi " + getCodi() + " són:");
+        System.out.println("\nNom: " + getNom());
+        System.out.println("\nExperiencia: " + getExperiencia());
+        System.out.print("\nSou: " + getSou());        
+        
+        
+        super.showUnitatDeRecerca();
+    }*/
+    
 }

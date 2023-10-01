@@ -225,7 +225,7 @@ public class Application {
 
                         for (int j = 0; j < centreRecercaActual.getDepartaments()[i].getpInvestigadorsPrincipals(); j++) {
 
-                            centreRecercaActual.getDepartaments()[i].getInvestigadorsPrincipals()[j].showInvestigadorPrincipal();
+                            centreRecercaActual.getDepartaments()[i].getInvestigadorsPrincipals()[j].showUnitatDeRecerca();
 
                         }
                     }
@@ -281,7 +281,7 @@ public class Application {
 
                         for (int j = 0; j < centreRecercaActual.getDepartaments()[i].getpInvestigadorsAssociats(); j++) {
 
-                            centreRecercaActual.getDepartaments()[i].getInvestigadorsAssociats()[j].showInvestigadorAssociat();
+                            centreRecercaActual.getDepartaments()[i].getInvestigadorsAssociats()[j].showUnitatDeRecerca();
 
                         }
                     }
@@ -336,7 +336,7 @@ public class Application {
 
                         for (int j = 0; j < centreRecercaActual.getDepartaments()[i].getpInvestigadorsAuxiliars(); j++) {
 
-                            centreRecercaActual.getDepartaments()[i].getInvestigadorsAuxiliars()[j].showInvestigadorAuxiliar();
+                            centreRecercaActual.getDepartaments()[i].getInvestigadorsAuxiliars()[j].showUnitatDeRecerca();
 
                         }
                     }

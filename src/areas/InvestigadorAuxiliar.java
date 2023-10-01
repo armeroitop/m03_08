@@ -6,20 +6,13 @@ package areas;
 
 import java.util.Scanner;
 
-
 /**
  *
  * @author itc
  */
-public class InvestigadorAuxiliar {
-    
-    private final static Scanner DADES = new Scanner(System.in);
+public class InvestigadorAuxiliar extends Investigador {
 
-    private String codi;
-    private String nom;
-    private int experiencia;
-    private double sou;
-
+    //private final static Scanner DADES = new Scanner(System.in);
     /*
      TODO CONSTRUCTOR
     
@@ -28,53 +21,15 @@ public class InvestigadorAuxiliar {
      Accions:
      - Assignar als atributs corresponents els valors passats com a paràmetres.
      */
-    
     public InvestigadorAuxiliar(String codi, String nom, int experiencia, double sou) {
-        this.codi = codi;
-        this.nom = nom;
-        this.experiencia = experiencia;
-        this.sou = sou;
+        super(codi, nom, experiencia, sou);
     }
 
 
     /*
      TODO Heu d'implementar tots els mètodes accessors possibles.  
      */
-    
-    public String getCodi() {
-        return codi;
-    }
-
-    public void setCodi(String codi) {
-        this.codi = codi;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public int getExperiencia() {
-        return experiencia;
-    }
-
-    public void setExperiencia(int experiencia) {
-        this.experiencia = experiencia;
-    }
-
-    public double getSou() {
-        return sou;
-    }
-
-    public void setSou(double sou) {
-        this.sou = sou;
-    }
-   
-
-    /*
+ /*
     TODO
     
      Paràmetres: cap
@@ -125,32 +80,43 @@ public class InvestigadorAuxiliar {
      
      Retorn: cap
      */
-    public void updateInvestigadorAuxiliar() {
-        System.out.println("\nCodi de l'Investigador Auxiliar: " + codi);
+    
+    /*public void updateInvestigadorAuxiliar() {
+        System.out.println("\nCodi de l'Investigador Auxiliar: " + getCodi());
         System.out.println("\nEntra el nou valor codi:");
-        codi = DADES.next();
+        setCodi(DADES.next());
         DADES.nextLine(); //Neteja buffer
-        System.out.println("\nNom de l'Investigador Auxiliar: " + nom);
+       System.out.println("\nNom de l'Investigador Auxiliar: " + getNom());
         System.out.println("\nEntra el nou valor nom:");
-        nom = DADES.nextLine();
+        setNom(DADES.nextLine());
         
-        DADES.nextLine(); //Neteja buffer
-        System.out.println("\nExperiencia Investigador Auxiliar:" + experiencia);
+       DADES.nextLine(); //Neteja buffer
+       System.out.println("\nExperiencia Investigador Auxiliar:" + getExperiencia());
         System.out.println("\nEntra nou valor experiència:");
-        experiencia = DADES.nextInt();
+        setExperiencia(DADES.nextInt());
 
-        System.out.println("\nSou de l'Investigador Auxiliar: " + sou);
+        System.out.println("\nSou de l'Investigador Auxiliar: " + getSou());
+      
         do {
             System.out.println("\nEntra nou valor sou (superior a 12000 però no més gran que 20000):");
-            sou = DADES.nextDouble();
-        } while (sou <= 12000 || sou > 20000);
-    }
+            setSou(DADES.nextDouble());
+        } while (getSou() <= 12000 || getSou() > 20000);
+    }*/
     
-
-    public void showInvestigadorAuxiliar() {
-        System.out.println("\nLes dades de l'Investigador/a Auxiliar amb codi " + codi + " són:");
-        System.out.println("\nNom: " + nom);
-        System.out.println("\nExperiencia: " + experiencia);
-        System.out.print("\nSou: " + sou);
+    @Override
+    public void updateUnitatDeRecerca() {
+        super.updateUnitatDeRecerca();
+        do {
+            System.out.println("\nEntra nou valor sou (superior a 12000 però no més gran que 20000):");
+            setSou(DADES.nextDouble());
+        } while (getSou() <= 12000 || getSou() > 20000);
     }
+
+    /*public void showInvestigadorAuxiliar() {
+        
+        System.out.println("\nLes dades de l'Investigador/a Auxiliar amb codi " + getCodi() + " són:");
+        System.out.println("\nNom: " + getNom());
+        System.out.println("\nExperiencia: " + getExperiencia());
+        System.out.print("\nSou: " + getSou());
+    }*/
 }
