@@ -1,6 +1,8 @@
 package principal;
 
 import areas.CentreRecerca;
+import areas.Departament;
+import areas.Investigador;
 import java.util.Scanner;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Scanner;
  * @author itc
  */
 public class Application {
-    
+
     private final static Scanner DADES = new Scanner(System.in);
 
     private static CentreRecerca[] centresRecerca = new CentreRecerca[10];
@@ -47,21 +49,21 @@ public class Application {
                     break;
                 case 3:
                     if (centreRecercaActual != null) {
-                        menuInvestigadorsPrincipals();
+                        menuInvestigadors(Investigador.INVESTIGADOR_PRINCIPAL);
                     } else {
                         System.out.println("\nPrimer s'ha de seleccionar el Centre Recerca al menú Gestió Centres Recerca");
                     }
                     break;
                 case 4:
                     if (centreRecercaActual != null) {
-                        menuInvestigadorsAssociats();
+                        menuInvestigadors(Investigador.INVESTIGADOR_ASSOCIAT);
                     } else {
                         System.out.println("\nPrimer s'ha de seleccionar el Centre Recerca al menú Gestió Centres Recerca");
                     }
                     break;
                 case 5:
                     if (centreRecercaActual != null) {
-                        menuInvestigadorsAuxiliars();
+                        menuInvestigadors(Investigador.INVESTIGADOR_AUXILIAR);
                     } else {
                         System.out.println("\nPrimer s'ha de seleccionar el Centre Recerca al menú Gestió Centres Recerca");
                     }
@@ -182,6 +184,86 @@ public class Application {
         } while (opcio != 0);
     }
 
+
+    /*
+     TODO Heu de desenvolupar el menuInvestigadors amb les opcions que podeu veure.
+     Nota: penseu que quan arribem aquí, l'atribut centreRecercaActual no és null
+       
+     Opció 0. Sortir -->       Surt del menú i retorna al menú principal
+     Opció 1. Alta -->         Crea un/a Investigador/a  del Centre Recerca actual afegint-lo/a a un Departament. 
+                               Penseu que CentreRecerca sap afegir un/a Investigador/a  a un Departament seleccionat.       
+     Opció 2. Modificar -->    Permet modificar un/a Investigador/a  del Centre Recerca actual. Penseu que tots/es els/les 
+                               Investigadors/es  d'un Centre Recerca pertanyen a un departament d'aquest Centre Recerca i que 
+                               CentreRecerca sap modificar un/a Investigador/a  que pertany a un dels seus Departaments.
+     Opció 3. Llista Investigadors  --> Imprimeix les dades de tots/es Investigadors/es  del Centre Recerca actual.
+        
+     A més, heu de fer una estructura iterativa per tornar a mostrar el menú sempre que no es premi l'opció 0 de sortida
+     
+     Recomanacions:
+     - estructura de control switch-case per bifurcar les opcions
+     - si no s'ha introduït cap opció de les de la llista, s'ha de mostrar el missatge "S'ha de seleccionar una opció correcta del menú."
+     - definiu una variable opcio de tipus enter
+     */
+    public static void menuInvestigadors(int tipusInvestigador) {
+        int opcio;
+        do {
+            System.out.println("\nSelecciona una opció");
+            System.out.println("\n0. Sortir");
+            System.out.println("\n1. Alta");
+            System.out.println("\n2. Modificar");
+            System.out.println("\n3. Llistat Investigadors");
+            opcio = DADES.nextInt();
+            switch (opcio) {
+                case 0:
+                    break;
+                case 1:
+                    switch (tipusInvestigador) {
+                        case Investigador.INVESTIGADOR_PRINCIPAL:
+                            centreRecercaActual.addInvestigadorPrincipalDepartament();
+                            break;
+                        case Investigador.INVESTIGADOR_AUXILIAR:
+                            centreRecercaActual.addInvestigadorAuxiliarDepartament();
+                            break;
+                        case Investigador.INVESTIGADOR_ASSOCIAT:
+                            centreRecercaActual.addInvestigadorAssociatDepartament();
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+
+                case 2:
+                    switch (tipusInvestigador) {
+                        case Investigador.INVESTIGADOR_PRINCIPAL:
+                            centreRecercaActual.updateInvestigadorPrincipalDepartament();
+                            break;
+                        case Investigador.INVESTIGADOR_AUXILIAR:
+                            centreRecercaActual.updateInvestigadorAuxiliarDepartament();
+                            break;
+                        case Investigador.INVESTIGADOR_ASSOCIAT:
+                            centreRecercaActual.updateInvestigadorAssociatDepartament();
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 3:
+                    for (int i = 0; i < centreRecercaActual.getpDepartaments(); i++) {
+
+                        for (int j = 0; j < centreRecercaActual.getDepartaments()[i].getpInvestigadors(); j++) {
+
+                            centreRecercaActual.getDepartaments()[i].getInvestigadors()[j].showUnitatDeRecerca();
+
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("\nS'ha de seleccionar una opció correcta del menú.");
+                    break;
+            }
+        } while (opcio != 0);
+    }
+
     /*
      TODO Heu de desenvolupar el menuInvestigadorsPrincipals amb les opcions que podeu veure.
      Nota: penseu que quan arribem aquí, l'atribut centreRecercaActual no és null
@@ -201,7 +283,7 @@ public class Application {
      - si no s'ha introduït cap opció de les de la llista, s'ha de mostrar el missatge "S'ha de seleccionar una opció correcta del menú."
      - definiu una variable opcio de tipus enter
      */
-    public static void menuInvestigadorsPrincipals() {
+ /*public static void menuInvestigadorsPrincipals() {
         int opcio;
 
         do {
@@ -235,10 +317,9 @@ public class Application {
                     break;
             }
         } while (opcio != 0);
-    }
+    }*/
 
-
-    /*
+ /*
      TODO Heu de desenvolupar el menuInvestigadorsAssociats amb les opcions que podeu veure.
      Nota: penseu que quan arribem aquí, l'atribut centreRecercaActual no és null
        
@@ -257,7 +338,7 @@ public class Application {
      - si no s'ha introduït cap opció de les de la llista, s'ha de mostrar el missatge "S'ha de seleccionar una opció correcta del menú."
      - definiu una variable opcio de tipus enter
      */
-    public static void menuInvestigadorsAssociats() {
+ /* public static void menuInvestigadorsAssociats() {
         int opcio;
 
         do {
@@ -291,9 +372,9 @@ public class Application {
                     break;
             }
         } while (opcio != 0);
-    }
+    }*/
 
-    /*
+ /*
      TODO Heu de desenvolupar el menuInvestigadorsAuxiliars amb les opcions que podeu veure.
      Nota: penseu que quan arribem aquí, l'atribut centreRecercaActual no és null
        
@@ -312,6 +393,7 @@ public class Application {
      - si no s'ha introduït cap opció de les de la llista, s'ha de mostrar el missatge "S'ha de seleccionar una opció correcta del menú."
      - definiu una variable opcio de tipus enter
      */
+ /* 
     public static void menuInvestigadorsAuxiliars() {
         int opcio;
 
@@ -347,7 +429,8 @@ public class Application {
             }
         } while (opcio != 0);
     }
-
+     */
+    
     public static Integer selectCentreRecerca(CentreRecerca centreRecerca) {
 
         String nom;

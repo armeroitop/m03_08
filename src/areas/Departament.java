@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class Departament implements UnitatDeRecerca {
 
     //private final static Scanner DADES = new Scanner(System.in);
+    private String codi;
     private String nom;
     private String area;
-    private String codi; 
     /*
     private InvestigadorAssociat[] investigadorsAssociats = new InvestigadorAssociat[100];
     private int pInvestigadorsAssociats = 0; //Primera posició buida de l'array d'investigadors associats
@@ -65,7 +65,7 @@ public class Departament implements UnitatDeRecerca {
         return investigadorsPrincipals;
     }*/
 
-    /*public void setInvestigadorsPrincipals(InvestigadorPrincipal[] investigadorsPrincipals) {
+ /*public void setInvestigadorsPrincipals(InvestigadorPrincipal[] investigadorsPrincipals) {
         this.investigadorsPrincipals = investigadorsPrincipals;
     }
 
@@ -108,7 +108,6 @@ public class Departament implements UnitatDeRecerca {
     public void setpInvestigadorsAuxiliars(int pInvestigadorsAuxiliars) {
         this.pInvestigadorsAuxiliars = pInvestigadorsAuxiliars;
     }*/
-
     public Investigador[] getInvestigadors() {
         return investigadors;
     }
@@ -124,8 +123,7 @@ public class Departament implements UnitatDeRecerca {
     public void setpInvestigadors(int pInvestigadors) {
         this.pInvestigadors = pInvestigadors;
     }
-    
-    
+
     public String getCodi() {
         return codi;
     }
@@ -231,7 +229,14 @@ public class Departament implements UnitatDeRecerca {
 
         InvestigadorPrincipal nouInvestigadorPrincipal = InvestigadorPrincipal.addInvestigadorPrincipal();
 
-        if (selectInvestigadorPrincipal(nouInvestigadorPrincipal.getCodi()) == -1) {
+        //DEPRECATED
+        /*if (selectInvestigadorPrincipal(nouInvestigadorPrincipal.getCodi()) == -1) {
+            investigadors[pInvestigadors] = nouInvestigadorPrincipal;
+            pInvestigadors++;
+        } else {
+            System.out.println("\nInvestigador principal ja existeix");
+        }  */
+        if (selectInvestigador(Investigador.INVESTIGADOR_PRINCIPAL, nouInvestigadorPrincipal.getCodi()) == -1) {
             investigadors[pInvestigadors] = nouInvestigadorPrincipal;
             pInvestigadors++;
         } else {
@@ -254,22 +259,50 @@ public class Departament implements UnitatDeRecerca {
 
         return -1;
     }
-    
+
+    /**
+     *
+     * @param tipusInvestigador
+     * @param codi
+     * @return
+     */
     public int selectInvestigador(int tipusInvestigador, String codi) {
 
         if (codi == null) {
-            System.out.println("\nCodi de l'Investigador/a Principal?:");
+            System.out.println("\nCodi de l'Investigador/a?:");
             codi = DADES.next();
         }
 
         for (int i = 0; i < pInvestigadors; i++) {
             if (investigadors[i].getCodi().equals(codi)) {
-                return i;
+                switch (tipusInvestigador) {
+                    case Investigador.INVESTIGADOR_PRINCIPAL:
+                        if (investigadors[i] instanceof InvestigadorPrincipal) {
+                            return i;
+                        } else {
+                            System.out.println("\nl'Investigador no es del tipus PRINCIPAL");
+                        }
+                        break;
+                    case Investigador.INVESTIGADOR_ASSOCIAT:
+                        if (investigadors[i] instanceof InvestigadorAssociat) {
+                            return i;
+                        } else {
+                            System.out.println("\nl'Investigador no es del tipus ASSOCIAT");
+                        }
+                        break;
+                    case Investigador.INVESTIGADOR_AUXILIAR:
+                        if (investigadors[i] instanceof InvestigadorAuxiliar) {
+                            return i;
+                        } else {
+                            System.out.println("\nl'Investigador no es del tipus PRINCIPAL");
+                        }
+                        break;
+
+                    default:
+                        throw new AssertionError();
+                }
             }
         }
-        
-        //Definiu el tipusInvestigador com 1=InvestigadorPrincipal, 2=InvestigadorAssociat i 3=InvestigadorAuxiliar.
-        //instanceof 
 
         return -1;
     }
@@ -299,7 +332,14 @@ public class Departament implements UnitatDeRecerca {
 
         InvestigadorAssociat nouInvestigadorAssociat = InvestigadorAssociat.addInvestigadorAssociat();
 
-        if (selectInvestigadorAssociat(nouInvestigadorAssociat.getCodi()) == -1) {
+        //DEPRECATED
+        /*if (selectInvestigadorAssociat(nouInvestigadorAssociat.getCodi()) == -1) {
+            investigadors[pInvestigadors] = nouInvestigadorAssociat;
+            pInvestigadors++;
+        } else {
+            System.out.println("\nInvestigador associat ja existeix");
+        }*/
+        if (selectInvestigador(Investigador.INVESTIGADOR_ASSOCIAT, nouInvestigadorAssociat.getCodi()) == -1) {
             investigadors[pInvestigadors] = nouInvestigadorAssociat;
             pInvestigadors++;
         } else {
@@ -347,7 +387,14 @@ public class Departament implements UnitatDeRecerca {
 
         InvestigadorAuxiliar nouInvestigadorAuxiliar = InvestigadorAuxiliar.addInvestigadorAuxiliar();
 
-        if (selectInvestigadorAuxiliar(nouInvestigadorAuxiliar.getCodi()) == -1) {
+        //DEPRECATED
+        /*if (selectInvestigadorAuxiliar(nouInvestigadorAuxiliar.getCodi()) == -1) {
+            investigadors[pInvestigadors] = nouInvestigadorAuxiliar;
+            pInvestigadors++;
+        } else {
+            System.out.println("\nInvestigador auxiliar ja existeix");
+        }*/
+        if (selectInvestigador(Investigador.INVESTIGADOR_AUXILIAR, nouInvestigadorAuxiliar.getCodi()) == -1) {
             investigadors[pInvestigadors] = nouInvestigadorAuxiliar;
             pInvestigadors++;
         } else {
@@ -373,11 +420,19 @@ public class Departament implements UnitatDeRecerca {
 
     @Override
     public void updateUnitatDeRecerca() {
-
+        System.out.println("\nNom del Departament: " + nom);
+        System.out.println("\nEntra el nou nom:");
+        nom = DADES.nextLine();
+        System.out.println("\nArea del Departament : " + area);
+        System.out.println("\nEntra el nou area:");
+        area = DADES.nextLine();
     }
 
     @Override
     public void showUnitatDeRecerca() {
+        System.out.println("\nLes dades del Departament " + nom + " són:");
+        System.out.println("\nArea: " + area);
+        System.out.println("\nDespesa Total: " + calcularTotalDespesa());
 
     }
 

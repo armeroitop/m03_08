@@ -18,6 +18,7 @@ public class CentreRecerca implements UnitatDeRecerca{
     private String ubicacio;
     private Departament[] departaments = new Departament[5];
     private int pDepartaments = 0; //Primera posició buida de l'array de Departaments
+    private String codi;
 
     /*
      TODO CONSTRUCTOR
@@ -212,11 +213,11 @@ public class CentreRecerca implements UnitatDeRecerca{
 
         if (indexDepartament != -1) {
 
-            int indexInvestigadorPrincipal = departaments[indexDepartament].selectInvestigadorPrincipal(null);
+            int indexInvestigadorPrincipal = departaments[indexDepartament].selectInvestigador(Investigador.INVESTIGADOR_PRINCIPAL,null);
 
             if (indexInvestigadorPrincipal != -1) {
 
-                departaments[indexDepartament].getInvestigadorsPrincipals()[indexInvestigadorPrincipal].updateUnitatDeRecerca();
+                departaments[indexDepartament].getInvestigadors()[indexInvestigadorPrincipal].updateUnitatDeRecerca();
 
             } else {
 
@@ -254,11 +255,11 @@ public class CentreRecerca implements UnitatDeRecerca{
 
         if (indexDepartament != -1) {
 
-            int indexInvestigadorAssociat = departaments[indexDepartament].selectInvestigadorAssociat(null);
+            int indexInvestigadorAssociat = departaments[indexDepartament].selectInvestigador(Investigador.INVESTIGADOR_ASSOCIAT,null);
 
             if (indexInvestigadorAssociat != -1) {
 
-                departaments[indexDepartament].getInvestigadorsAssociats()[indexInvestigadorAssociat].updateUnitatDeRecerca();
+                departaments[indexDepartament].getInvestigadors()[indexInvestigadorAssociat].updateUnitatDeRecerca();
 
             } else {
 
@@ -296,11 +297,11 @@ public class CentreRecerca implements UnitatDeRecerca{
 
         if (indexDepartament != -1) {
 
-            int indexInvestigadorAuxiliar = departaments[indexDepartament].selectInvestigadorAuxiliar(null);
+            int indexInvestigadorAuxiliar = departaments[indexDepartament].selectInvestigador(Investigador.INVESTIGADOR_AUXILIAR,null);
 
             if (indexInvestigadorAuxiliar != -1) {
 
-                departaments[indexDepartament].getInvestigadorsAuxiliars()[indexInvestigadorAuxiliar].updateUnitatDeRecerca();
+                departaments[indexDepartament].getInvestigadors()[indexInvestigadorAuxiliar].updateUnitatDeRecerca();
 
             } else {
 
@@ -317,12 +318,20 @@ public class CentreRecerca implements UnitatDeRecerca{
     }
      @Override
     public void updateUnitatDeRecerca() {
+        System.out.println("\nNom Centre Recerca: " + nom);
+        System.out.println("\nEntra el nou nom:");
+        nom = DADES.nextLine();
+        System.out.println("\nUbicacio Centre Recerca: " + ubicacio);
+        System.out.println("\nEntra nou valor ubicacio:");
+        ubicacio = DADES.nextLine();
         
     }
 
     @Override
     public void showUnitatDeRecerca() {
-        
+        System.out.println("\nLes dades del Centre Recerca " + nom + " són:");
+        System.out.println("\nUbicació: " + ubicacio);
+        System.out.println("\nDespesa Total: " + calcularTotalDespesa());
     }
 
 }
